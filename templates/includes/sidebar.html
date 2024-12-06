@@ -51,19 +51,31 @@
             <div class="slide-left disabled" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"/></svg></div>
             <ul class="side-menu ">
                 <li class="slide">
-                    <a class="side-menu__item" href="index.html"><i class="side-menu__icon fe fe-airplay"></i><span class="side-menu__label">Dashboard</span></a>
+                    <a class="side-menu__item" href="{% url 'accueil' %}"><i class="side-menu__icon fe fe-airplay"></i><span class="side-menu__label">Tableau de board </span></a>
                 </li>
+                
                 <li class="slide">
-                    <a class="side-menu__item" data-bs-toggle="slide"   href="javascript:void(0);"><i class="side-menu__icon fe fe-box"></i><span class="side-menu__label">Apps</span><i class="angle fe fe-chevron-down"></i></a>
+                    <a class="side-menu__item" data-bs-toggle="slide"   href="javascript:void(0);"><i class="side-menu__icon fe fe-box"></i><span class="side-menu__label">Gestion ordre de transport </span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
                         <li class="side-menu__label1"><a href="javascript:void(0);">Apps</a></li>
-                        <li><a class="slide-item" href="cards.html">Cards</a></li>
+                        <li><a class="slide-item" href="{% url 'traitements:create' %}">Nouvel ordre de transport</a></li>
                         
                         <li class="sub-slide">
-                            <a class="slide-item" data-bs-toggle="sub-slide" href="javascript:void(0);"><span class="sub-side-menu__label">Mail</span><i class="sub-angle fe fe-chevron-down"></i></a>
-                            <ul class="sub-slide-menu">
-                                <li><a class="sub-side-menu__item" href="mail.html">Mail</a></li>
-                            </ul>
+                            <a class="slide-item" data-bs-toggle="sub-slide" href="{% url 'traitements:index' %}"><span class="sub-side-menu__label">Liste des transports</span></a>
+        
+                        </li>
+                        
+                    </ul>
+                </li>
+
+                <li class="slide">
+                    <a class="side-menu__item" data-bs-toggle="slide"   href="javascript:void(0);"><i class="side-menu__icon fe fe-box"></i><span class="side-menu__label">Gestion Personnel </span><i class="angle fe fe-chevron-down"></i></a>
+                    <ul class="slide-menu">
+                        <li class="side-menu__label1"><a href="javascript:void(0);">Apps</a></li>
+                        
+                        <li class="sub-slide">
+                            <a class="slide-item" data-bs-toggle="sub-slide" href="{% url 'personnels:index' %}"><span class="sub-side-menu__label">Liste des personnels</span></a>
+        
                         </li>
                         
                     </ul>

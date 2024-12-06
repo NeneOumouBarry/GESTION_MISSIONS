@@ -1,0 +1,330 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div id="listebl" hx-target="#listebl" hx-swap-oob="true">
+<!-- row -->
+    <div class="row row-sm">
+        <div class="col-lg-12">
+            <div class="main-content-body main-content-body-profile">
+            
+                <div class="tab-content">
+                    <div class="tab-pane active show" id="tab-50">
+                        <div class="card">
+                            <div class="p-2">
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                                        <div class="alert alert-outline-danger mg-b-0 p-2" role="alert">
+                                            <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button">
+                                            <span aria-hidden="true">×</span></button>
+                                            <strong>Oh snap!</strong> {{message}}
+                                        </div>
+                                        {% endif %}
+                                        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                
+                                        <div class="alert alert-success" role="alert">
+                                            <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                            <strong>Success !</strong> {{message}}
+                                        </div>
+                                       
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="card-header">
+                                <div class="main-content-label bg-primary text-center p-2 text-white">
+                                    LISTE DES ORDRES DE TRANSPORT
+                                </div>
+                                <a href="{% url 'traitements:create' %}" class="btn btn-primary mb-2 float-end">Ajouter un ordre de transport</a>    &nbsp;&nbsp;
+                            </div>
+                            <!-- Vous pouvez ajouter le contenu ici pour la liste des BL -->
+
+                            <div class="col-md-12 col-xl-12 mt-2">
+                                <div class="main-content-body-invoice">
+                                   
+                                    <div class="card">
+                                       
+                                        <div class="card-body">
+                                            <div >
+                                              <div class="table-responsive" >
+                                                    <table class="table border-top-0  table-bordered text-nowrap border-bottom" id="responsive-datatable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="border-bottom-0 text-center">N°</th>
+                                                                <th class="border-bottom-0 text-center">Client </th>
+                                                                <th class="border-bottom-0 text-center">Nature Colis</th>
+                                                                <th class="border-bottom-0 text-center">Code Colis</th>
+                                                                <th class="border-bottom-0 text-center">Quantité Transportée</th>
+                                                                <th class="border-bottom-0 text-center">Citerne</th>
+                                                                <th class="border-bottom-0 text-center">N° Colis</th>
+                                                                <th class="border-bottom-0 text-center">N° BC</th>
+                                                                <th class="border-bottom-0 text-center">N° BL/OT transit</th>
+                                                                <th class="border-bottom-0 text-center">TranspQtetir</th>
+                                                                <th class="border-bottom-0 text-center">Tracteur</th>
+                                                                <th class="border-bottom-0 text-center">Remorque</th>
+                                                                <th class="border-bottom-0 text-center">Chauffeur</th>
+                                                               <th class="border-bottom-0 text-center">Actions</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody >
+                                                            {% for liste in listes %}
+                                                                <tr>
+                                                                    <td class="text-center">{{liste.numero}}</td>
+                                                                    <td class="text-center">{{liste.Client.nom}}</td>
+                                                                    <td class="text-center">{{liste.nature_colds}}</td>
+                                                                    <td class="text-center">{{liste.code_coli}}</td>
+                                                                    <td class="text-center">{{liste.quantite_transporteq}}</td>
+                                                                    <td class="text-center">{{liste.citerne}}</td>
+                                                                    <td class="text-center">{{liste.numero_coli}}</td>
+                                                                    <td class="text-center">{{liste.numero_bc}}</td>
+                                                                    <td class="text-center">{{liste.numero_bl}}</td>
+                                                                    <td class="text-center">{{liste.transpQteTir}}</td>
+                                                                    <td class="text-center">{{liste.seb_tracteur}}</td>
+                                                                    <td class="text-center">{{liste.seb_remorque}}</td>
+                                                                    <td class="text-center">{{liste.chauffeur}}</td>
+                                                                    <td class="text-center">
+
+                                                                        <button class="btn btn-success btn-sm bg-success-transparent" data-bs-target="#modaldemo3-{{liste.id}}" data-bs-toggle="modal" ata-bs-placement="bottom" data-bs-toggle="tooltip" title="Voir +"><i
+                                                                            class="fe fe-eye text-success"></i></button>&nbsp;&nbsp;
+                                            
+                                                                        <div class="modal" id="modaldemo3-{{liste.id}}">
+                                                                            <div class="modal-dialog modal-xl" role="document">
+                                                                                <div class="modal-content modal-content-demo">
+                                                                                    <div class="modal-header">
+                                                                                        <h6 class="modal-title">Détail de la Ligne</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Numéro OT</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.numero}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Numéro Fret</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.numero_fret}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Nature Colis</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.nature_colds}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Code type Colis</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.code_coli}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Quantité Transportée en Litre</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.quantite_transporte}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Citerne</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.citerne}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">N° Colis</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.numero_coli}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">N° BC</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.numero_bc}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">N° BL/OT transit</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.numero_bl}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Transport Quantité</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.transpQteTirt}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Seb Tracteur</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.seb_tracteur}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Seb Remorque</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.seb_remorque}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Chauffeur</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.chauffeur}}
+                                                                                            </div>
+                                                                                            <hr>
+                                                                                            <div class="main-content-label p-2 mg-b-5 text-center bg-primary text-white">
+                                                                                                PARTIE REMPLIE AVANT LE DEPART
+                                                                                             </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Date de Chargement Prévu</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.date_chargement_prevu}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Date/heure Chargement</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.heure_debut}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Lieu Chargement</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.lieu_chargement}}
+                                                                                            </div>
+                                                                                             
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Date /heure fin Chargement</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.heure_fin}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Destination</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.destination}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Kilometrage prévu A/R</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.kilometrage}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Km Départ</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.depart}}
+                                                                                            </div>
+                                                                                            
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Date de depart prevue</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.date_depart_prevu}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Estimation de durée de la mission</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.dure_mission}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Date/heure sortie parc</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.date_sortie_parc}}
+                                                                                            </div>
+
+                                                                                            <hr>
+                                                                                            <div class="main-content-label p-2 mg-b-5 text-center bg-primary text-white">
+                                                                                                PARTIE REMPLIE PENDANT LA MISSION
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Lieu Livraison</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.lieu_livraison}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Date/heure arrivée site</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.date_arive_site}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Date/heure livraison site</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.date_livraison_site}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Date/heure départ site</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.date_depart_site}}
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Etat de conformité des colis livré</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.etat_conformite_coli}}
+                                                                                            </div>
+
+                                                                                            <hr>
+                                                                                            <div class="main-content-label p-2 mg-b-5 text-center bg-primary text-white">
+                                                                                                PARTIE REMPLIE AU RETOUR
+                                                                                            </div>
+
+                                                                                            <div class="col-md-3 list-group-item bg-light fw-bold">Date/heure retour parc</div>
+                                                                                            <div class="col-12 col-md-3 list-group-item">
+                                                                                                {{liste.date_retour_parc}}
+                                                                                            </div>
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <form action="{% url 'traitements:render_to_pdf' %} " method="post">
+                                                                                            {% csrf_token %}
+                                                                                            <input type="text" name="idgesbl" value="{{liste.id}}" hidden>
+                                                                                            <button class="btn ripple btn-primary" type="submit" >Imprimer</button>
+                                                                                        </form>
+                                                                                        
+                                                                                        <button class="btn ripple btn-secondary" data-bs-dismiss="modal" type="button">Annuler</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <a href="{% url 'traitements:update' liste.slug %}" class="btn btn-primary btn-sm bg-primary-transparent" title="Modifier">
+                                                                            <i class="fe fe-edit-2 text-primary"></i>
+                                                                        </a>
+                                                                        <form action="#" method="post" style="display: inline;" title="Supprimer">
+                                                                            {% csrf_token %}
+                                                                            <button class="btn btn-danger btn-sm bg-danger-transparent" type="submit">
+                                                                                <i class="fa fa-trash text-danger"></i>
+                                                                            </button>
+                                                                        </form>
+
+                                                                        
+                                                                        
+                                                                        
+                                                                    </td>
+                                                        
+                                                                </tr>
+                                                            
+                                                            {% endfor %}
+                                                        </tbody>
+                                                      
+                                                    </table>
+                                               </div>
+                                                
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block Script %}
+    <!-- DATA TABLE JS-->
+    <script src="{% static 'js/form-validation.js' %}"></script>
+    <script>
+    $(document).ready(function () {
+        $('#id_type').select2();
+    });
+    </script>
+    <script src="{% static 'js/table-data.js' %}"></script>
+    <script src="{% static 'plugins/datatable/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'plugins/datatable/js/dataTables.bootstrap5.js' %}"></script>
+    <script src="{% static 'plugins/datatable/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'plugins/datatable/js/buttons.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'plugins/datatable/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'plugins/datatable/responsive.bootstrap5.min.js' %}"></script>
+
+    {% endblock Script %}
+    </div>
+    {% endblock %}

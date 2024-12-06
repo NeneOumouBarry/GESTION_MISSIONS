@@ -1,0 +1,122 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+           @page {
+                size: a4 portrait;
+                @frame header_frame {
+                    -pdf-frame-content: header_content;
+                    left: 20pt; width: 552pt; top: 0pt; height: 820pt;
+                }
+                @frame content_frame {
+                    left: 20pt; width: 555pt; top: 40pt; height: 820pt;
+                }
+                @frame footer_frame {
+                    -pdf-frame-content: footer_content;
+                    left: 20pt; width: 555pt; top: 772pt; height: 100pt;
+                }
+            }
+            table,
+                td{
+        
+                    border: 1px solid;
+                    border-collapse: collapse;
+                    padding: 3px;
+        
+                }    
+
+                .cellule-fusionnee {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    height: 100%; 
+                  }
+
+                caption {
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                }
+        
+        </style>
+    </head>
+    <body>
+        <div id="header_frame" style="margin-bottom: 30px;>
+            <div class="header">
+                <table style="text-align: left; width: 700px; height: 90px;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="height: 80px; width: 240px;"><img src="static/img/logo/UMS-LOGO-PNG.png"
+                                    style="width: 240px; height: 70px;"></td>
+                            <td
+                                style="text-align: center; height: 80px; width: 500px; font-family: Arial; font-size: 18px;">
+                               ORDRE DE TRANSPORT N°/<span style="color: red;">{{data.numero}}</span>
+                            </td>
+                            <td
+                                style="text-align: center; height: 70px; width: 300px; font-family: Century Gothic; font-size: 16px;">
+                                Ref: 25Fr.OP0<br>
+                                V05 du 26/03/2018<br>
+                                C3 : Restreint<br>
+                                &nbsp;Page 1/1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+         
+         
+        <div id="content_frame">
+            <div class="content" >
+                <table>
+                    <tr>
+                        <td><span style="font-family: Calibri;font-size: 14px;">CLIENT: …{{data.client}} </span></td>
+                        <td><span style="font-family: Calibri;font-size: 14px;">N° FRET : …{{data.numero_fret}}</span></td>
+                    </tr>
+                    <tr>
+                        <td><span style="font-family: Calibri;font-size: 14px;">NATURE COLIS : …{{data.nature_colds}} </span></td>
+                        <td><span style="font-family: Calibri;font-size: 14px;">TYPE COLIS : …{{data.code_coli}} </span></td>
+                    </tr>
+                    <tr>
+                        <td><span style="font-family: Calibri;font-size: 14px;">QUANTITE TRANSPORTER : …{{data.quantite_transporte}} </span></td>
+                        <td><span style="font-family: Calibri;font-size: 14px;">CITERNE : …{{data.citerner}} </span></td>
+                    </tr>
+                    <tr>
+                        <td><span style="font-family: Calibri;font-size: 14px;">N° COLIS : …{{data.numero_coli}}</span></td>
+                        <td><span style="font-family: Calibri;font-size: 14px;">N° BC : … {{data.numero_bc}} </span></td>
+                    </tr>
+                    <tr>
+                        <td><span style="font-family: Calibri;font-size: 14px;">N° BL/OT Transit : …{{data.tracteur.numero_bl}}</span></td>
+                        <td><span style="font-family: Calibri;font-size: 14px;">TRANSPORT QUANTITE : …{{data.transpQteTir}}</span></td>
+                    </tr>
+                    <tr>
+                        <td><span style="font-family: Calibri;font-size: 14px;">SEB TRACTEUR : …{{data.seb_tracteur}}</span></td>
+                        <td><span style="font-family: Calibri;font-size: 14px;">SEB REMORQUE : …{{data.seb_remorque}} {{data.chauffeur.prenom}} </span></td>
+                    </tr>
+                    <tr>
+                        <td><span style="font-family: Calibri;font-size: 14px;">CHAUFFEUR : …{{data.chauffeur}}</span></td>
+                    </tr>
+                </table>
+            </div>
+         </div>
+         
+         <table style="border: 1px solid black;text-align: center;padding: 8px;">
+            <caption style="font-family: Arial; font-size: 18px;">PARTIE REMPLIE AVANT LE DEPART</caption>
+            <tr style="font-family: Calibri;">
+                <th style="font-size: 12px;">DATE CHARGEMENT PREVU</th>
+                <th style="font-size: 12px;">DATE/HEURE DEBUT CHARGEMENT</th>
+                <th style="font-size: 12px;">LIEU CHARGEMENT</th>
+                <th style="font-size: 12px;">DATE HEURE FIN CHARGEMENT</th>
+                <th style="font-size: 12px;">DESTINATION</th>
+                <th style="font-size: 12px;">KILOMETRAGE PREVU A/R</th>
+                <th style="font-size: 12px;">KM DEPART</th>
+                <th style="font-size: 12px;">ESTIMATION DUREE MISSION</th>
+            </tr>
+        </table>
+            
+    </body>
+</html>

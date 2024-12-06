@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Liste des Personnels{% endblock %}
+
+{% block content %}
+<!-- row -->
+<div class="row row-sm">
+    <div class="col-lg-12">
+        <div class="main-content-body main-content-body-profile">
+            <!-- Formulaire d'ajout -->
+            <div class="tab-content">
+                <div class="tab-pane active show" id="tab-50">
+                    <div class="card">
+                        <div class="p-2">
+                            {% if messages %}
+                                {% for message in messages %}
+                                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                                    <div class="alert alert-outline-danger mg-b-0 p-2" role="alert">
+                                        <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button">
+                                        <span aria-hidden="true">×</span></button>
+                                        <strong>Oh snap!</strong> {{message}}
+                                    </div>
+                                    {% endif %}
+                                    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+
+                                    <div class="alert alert-success" role="alert">
+                                        <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <strong>Success !</strong> {{message}}
+                                    </div>
+                                   
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="card-header">
+                            <div class="main-content-label bg-primary text-center p-2 text-white">
+                                Ajout d'un Nouveau Personnel
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <div class="row mb-2">
+                                    <!-- Champ type -->
+                                    <div class="col-md-6">
+                                        {{ form.type|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.matricule|as_crispy_field }}
+                                    </div>
+                                    <!-- Champs nom et fonction -->
+                                    <div class="col-md-6">
+                                        {{ form.nom|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.fonction|as_crispy_field }}
+                                    </div>
+                                    <!-- Champs adresse et téléphone -->
+                                    <div class="col-md-6">
+                                        {{ form.adresse|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.telephone|as_crispy_field }}
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-lg">Enregistrer</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Liste des personnels -->
+    <div class="col-lg-12">
+        <div class="main-content-body main-content-body-profile">
+            <div class="tab-content">
+                <div class="tab-pane active show" id="tab-50">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="main-content-label bg-primary text-center p-2 text-white">
+                                LISTE DES PERSONNELS
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-xl-12 mt-2">
+                            <div class="main-content-body-invoice">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table border-top-0 table-bordered text-nowrap border-bottom" id="responsive-datatable">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 15%;">Matricule</th>
+                                                        <th class="text-center"  style="width: 40%; ">NOM ET PRENOM</th>
+                                                        <th class="text-center" style="width: 15%;">ADRESSE</th>
+                                                        <th class="text-center" style="width: 15%;">TELEPHONE</th>
+                                                        <th class="text-center" style="width: 20%;">FONCTION</th>
+                                                        <th class="text-center" style="width: 10%;">TYPE</th>
+                                                        <th class="text-center" style="width: 10%;">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for personnel in personnels %}
+                                                    <tr>
+                                                        <td class="text-center">{{ personnel.matricule }}</td>
+                                                        <td class="text-center">{{ personnel.nom }}</td>
+                                                        <td class="text-center">{{ personnel.adresse }}</td>
+                                                        <td class="text-center">{{ personnel.telephone }}</td>
+                                                        <td class="text-center">{{ personnel.fonction }}</td>
+                                                        <td class="text-center">{{ personnel.type }}</td>
+                                                        <td class="text-center">
+                                                            <a href="{% url 'personnels:update' personnel.slug %}" class="btn btn-primary btn-sm bg-primary-transparent" title="Modifier">
+                                                                <i class="fe fe-edit-2 text-primary"></i>
+                                                            </a>
+                                                            <form action="{% url 'personnels:delete' personnel.slug %}" method="post" style="display: inline;" title="Supprimer">
+                                                                {% csrf_token %}
+                                                                <button class="btn btn-danger btn-sm bg-danger-transparent" type="submit">
+                                                                    <i class="fa fa-trash text-danger"></i>
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block Script %}
+<!-- Scripts liés au formulaire et tableaux -->
+<script src="{% static 'js/form-validation.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $('#id_type').select2();
+    });
+</script>
+<script src="{% static 'plugins/datatable/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'plugins/datatable/js/dataTables.bootstrap5.js' %}"></script>
+<script src="{% static 'js/table-data.js' %}"></script>
+{% endblock Script %}

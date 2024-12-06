@@ -41,11 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'crispy_bootstrap5',
+    'django.contrib.humanize',
     
     'accounts',
     'affectations',
     'structures',
-    'traitements'
+    'traitements',
+    'personnels'
     
 ]
 

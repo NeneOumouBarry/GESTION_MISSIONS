@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Modification Ordre de Transport{% endblock title %}
+{% block content %}
+
+
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="main-content-label mg-b-5 text-center">
+                   Ordre de transport
+                </div>
+                <hr>
+                <form action="" method="post" data-parsley-validate="">
+                    {% csrf_token %}
+                    <div class="row row-sm">
+                        <!-- Premier champ -->
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.numero|as_crispy_field}}
+                            </div>
+                        </div>
+                        
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.client|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.numero_fret|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.nature_colds|as_crispy_field}}
+                            </div>
+                        </div>
+
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.code_coli|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.quantite_transporte|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.citerne|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.numero_coli|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.numero_bc|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.numero_bl|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.transpQteTir|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.seb_tracteur|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.seb_remorque|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.chauffeur|as_crispy_field}}
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- AVANT DEPART -->
+                        <div class="main-content-label mg-b-5 text-center">
+                            PARTIE REMPLIE AVANT LE DEPART
+                         </div>
+                         <hr>
+                         <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.date_chargement_prevu|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.heure_debut|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.lieu_chargement|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.heure_fin|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.destination|as_crispy_field}}
+                            </div>
+                        </div>
+
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.kilometrage|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.depart|as_crispy_field}}
+                            </div>
+                        </div>
+
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.date_depart_prevu|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.dure_mission|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.date_sortie_parc|as_crispy_field}}
+                            </div>
+                        </div>
+                        
+                        <hr>
+                        <!-- PENDANT LA MISSION -->
+                        <div class="main-content-label mg-b-5 text-center">
+                            PARTIE REMPLIE PENDANT LA MISSION
+                         </div>
+                         <hr>
+                         <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.lieu_livraison|as_crispy_field}}
+                            </div>
+                         </div>
+
+                         <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.date_arive_site|as_crispy_field}}
+                            </div>
+                         </div>
+                         <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.date_livraison_site|as_crispy_field}}
+                            </div>
+                         </div>
+                         <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.date_depart_site|as_crispy_field}}
+                            </div>
+                         </div>
+                         <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.etat_conformite_coli|as_crispy_field}}
+                            </div>
+                         </div>
+                         
+                        <hr>
+                        <!-- RETOUR MISSION -->
+                        <div class="main-content-label mg-b-5 text-center">
+                            PARTIE REMPLIE AU RETOUR DE LA MISSION
+                         </div>
+                         <hr>
+                        <div class="col-4">
+                            <div class="form-group mg-b-0">
+                                {{form.date_retour_parc|as_crispy_field}}
+                            </div>
+                        </div>
+
+                        
+                        <!-- Bouton de validation -->
+                        <div class="col-12">
+                            <button class="btn btn-primary pd-x-20 mg-t-10" type="submit">Enregistrer </button>
+                        </div>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block Script %}
+    <!-- DATA TABLE JS-->
+    <script src="{% static 'js/form-validation.js' %}"></script>
+    <script>
+    $(document).ready(function () {
+        $('#id_type').select2();
+    });
+    </script>
+    <script src="{% static 'js/table-data.js' %}"></script>
+    <script src="{% static 'plugins/datatable/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'plugins/datatable/js/dataTables.bootstrap5.js' %}"></script>
+    <script src="{% static 'plugins/datatable/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'plugins/datatable/js/buttons.bootstrap5.min.js' %}"></script>
+    <script src="{% static 'plugins/datatable/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'plugins/datatable/responsive.bootstrap5.min.js' %}"></script>
+    {% endblock Script %}
+    
