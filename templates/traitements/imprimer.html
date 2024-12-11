@@ -42,10 +42,26 @@
                     font-weight: bold;
                     margin-bottom: 10px;
                 }
-        
+
+                .form-group {
+                    display: flex;
+                    align-items: center;
+                    
+                }
+                .form-group label {
+                    margin: 0;
+                    margin-right: 10px;
+                    font-size: 18px;
+                    
+                }
+                .readonly-box {
+                    padding: 5px 10px; 
+                    border: 1px solid #ccc; 
+                    border-radius: 4px; 
+                }
         </style>
     </head>
-    <body>
+    <body>   
         <div id="header_frame" style="margin-bottom: 30px;>
             <div class="header">
                 <table style="text-align: left; width: 700px; height: 90px;" border="1">
@@ -68,55 +84,21 @@
                 </table>
             </div>
         </div>
-         
-         
+
         <div id="content_frame">
-            <div class="content" >
+            <div class="content" style="margin-top: 15px;">
                 <table>
                     <tr>
-                        <td><span style="font-family: Calibri;font-size: 14px;">CLIENT: …{{data.client}} </span></td>
-                        <td><span style="font-family: Calibri;font-size: 14px;">N° FRET : …{{data.numero_fret}}</span></td>
+                        <td><span style="font-family: Calibri;font-size: 14px;gap: 20px;">LIEU DE CHARGEMENT:&nbsp;&nbsp;{{data.client}}</span></td>
+                        <td><span style="font-family: Calibri;font-size: 14px;border: solid 1px black;">LIEU DE DECHARGEMENT:&nbsp {{data.chauffeur}}</span></td>
                     </tr>
                     <tr>
-                        <td><span style="font-family: Calibri;font-size: 14px;">NATURE COLIS : …{{data.nature_colds}} </span></td>
-                        <td><span style="font-family: Calibri;font-size: 14px;">TYPE COLIS : …{{data.code_coli}} </span></td>
+                        <td><span style="font-family: Calibri;font-size: 14px;padding-left: 10px;">DATE DE CHARGEMENT:&nbsp {{data.date_chargement|date:"d/m/Y"}} </span></td>
+                        <td><span style="font-family: Calibri;font-size: 14px;">DATE DE DECHARGEMENT:&nbsp {{data.date_dechargement|date:"d/m/Y"}} </span></td>
                     </tr>
-                    <tr>
-                        <td><span style="font-family: Calibri;font-size: 14px;">QUANTITE TRANSPORTER : …{{data.quantite_transporte}} </span></td>
-                        <td><span style="font-family: Calibri;font-size: 14px;">CITERNE : …{{data.citerner}} </span></td>
-                    </tr>
-                    <tr>
-                        <td><span style="font-family: Calibri;font-size: 14px;">N° COLIS : …{{data.numero_coli}}</span></td>
-                        <td><span style="font-family: Calibri;font-size: 14px;">N° BC : … {{data.numero_bc}} </span></td>
-                    </tr>
-                    <tr>
-                        <td><span style="font-family: Calibri;font-size: 14px;">N° BL/OT Transit : …{{data.tracteur.numero_bl}}</span></td>
-                        <td><span style="font-family: Calibri;font-size: 14px;">TRANSPORT QUANTITE : …{{data.transpQteTir}}</span></td>
-                    </tr>
-                    <tr>
-                        <td><span style="font-family: Calibri;font-size: 14px;">SEB TRACTEUR : …{{data.seb_tracteur}}</span></td>
-                        <td><span style="font-family: Calibri;font-size: 14px;">SEB REMORQUE : …{{data.seb_remorque}} {{data.chauffeur.prenom}} </span></td>
-                    </tr>
-                    <tr>
-                        <td><span style="font-family: Calibri;font-size: 14px;">CHAUFFEUR : …{{data.chauffeur}}</span></td>
-                    </tr>
+                    
                 </table>
             </div>
-         </div>
-         
-         <table style="border: 1px solid black;text-align: center;padding: 8px;">
-            <caption style="font-family: Arial; font-size: 18px;">PARTIE REMPLIE AVANT LE DEPART</caption>
-            <tr style="font-family: Calibri;">
-                <th style="font-size: 12px;">DATE CHARGEMENT PREVU</th>
-                <th style="font-size: 12px;">DATE/HEURE DEBUT CHARGEMENT</th>
-                <th style="font-size: 12px;">LIEU CHARGEMENT</th>
-                <th style="font-size: 12px;">DATE HEURE FIN CHARGEMENT</th>
-                <th style="font-size: 12px;">DESTINATION</th>
-                <th style="font-size: 12px;">KILOMETRAGE PREVU A/R</th>
-                <th style="font-size: 12px;">KM DEPART</th>
-                <th style="font-size: 12px;">ESTIMATION DUREE MISSION</th>
-            </tr>
-        </table>
-            
+         </div>      
     </body>
 </html>
